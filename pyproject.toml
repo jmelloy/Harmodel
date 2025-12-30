@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "harmodel"
 version = "0.1.0"
-description = "A Python library that uses haranalyzer to read HAR files and outputs a simple client and Python models"
+description = "A Python library that uses haralyzer to read HAR files and outputs a simple client and Python models"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}

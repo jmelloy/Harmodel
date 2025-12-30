@@ -146,10 +146,10 @@ def test_generate_client_filters_headers():
     client_code = gen.generate_client(api_calls)
     
     # Should include Accept but not Host, Content-Length, Connection
-    assert '"Accept"' in client_code
-    assert '"Host"' not in client_code
-    assert '"Content-Length"' not in client_code
-    assert '"Connection"' not in client_code
+    assert "'Accept'" in client_code
+    assert "'Host'" not in client_code
+    assert "'Content-Length'" not in client_code
+    assert "'Connection'" not in client_code
 
 
 def test_generate_client_no_duplicate_methods():

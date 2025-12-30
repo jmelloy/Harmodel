@@ -54,7 +54,7 @@ class HarReader:
         Returns:
             List of HAR entries containing request/response data
         """
-        return self.parser.har_data['entries']
+        return self.parser.har_data.get('entries', [])
     
     def get_requests(self) -> List[Dict[str, Any]]:
         """

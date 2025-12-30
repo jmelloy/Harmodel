@@ -11,7 +11,7 @@ class ModelGenerator:
     """
     Generates Python data models from HTTP response data in HAR files.
     
-    Analyzes JSON responses and creates Pydantic-compatible model classes.
+    Analyzes JSON responses and creates dataclass model classes.
     """
     
     def __init__(self, har_reader=None):

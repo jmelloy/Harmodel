@@ -153,7 +153,7 @@ class ClientGenerator:
         
         # Add headers
         if headers:
-            lines.append(f'        headers = {json.dumps(headers, indent=12)[:-1]}        }}')
+            lines.append(f'        headers = {repr(headers)}')
             lines.append('        headers.update(kwargs.get("headers", {}))')
         else:
             lines.append('        headers = kwargs.get("headers", {})')
@@ -162,7 +162,7 @@ class ClientGenerator:
         
         # Add query parameters
         if query_params:
-            lines.append(f'        params = {json.dumps(query_params, indent=12)[:-1]}        }}')
+            lines.append(f'        params = {repr(query_params)}')
             lines.append('        params.update(kwargs.get("params", {}))')
         else:
             lines.append('        params = kwargs.get("params", {})')
@@ -174,7 +174,7 @@ class ClientGenerator:
             try:
                 # Try to parse as JSON
                 body_json = json.loads(body_text)
-                lines.append(f'        json_data = {json.dumps(body_json, indent=12)[:-1]}        }}')
+                lines.append(f'        json_data = {repr(body_json)}')
                 lines.append('        json_data.update(kwargs.get("json", {}))')
                 lines.append('')
                 lines.append(f'        response = self.session.request(')
