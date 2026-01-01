@@ -108,6 +108,11 @@ def test_url_to_model_name():
     # Empty path
     name = gen._url_to_model_name("https://api.example.com/", 3)
     assert name == "Response3Model"
+    
+    # Path with special characters like @
+    name = gen._url_to_model_name("https://api.example.com/user@email", 4)
+    assert name == "UserEmailModel"
+    assert "@" not in name
 
 
 def test_generate_models_from_responses():

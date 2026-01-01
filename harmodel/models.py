@@ -174,6 +174,7 @@ class ModelGenerator:
         """Convert URL to a valid model name."""
         # Extract path from URL
         from urllib.parse import urlparse
+        import re
 
         parsed = urlparse(url)
         path = parsed.path.strip("/")
@@ -185,6 +186,10 @@ class ModelGenerator:
             name_part = parts[-1] if parts else f"Response{index}"
             # Remove query parameters and file extensions
             name_part = name_part.split("?")[0].split(".")[0]
+            
+            # Remove special characters - keep only alphanumeric, underscore, hyphen
+            name_part = re.sub(r'[^a-zA-Z0-9_-]', '_', name_part)
+            
             # Convert to PascalCase
             words = name_part.replace("_", " ").replace("-", " ").split()
             model_name = "".join(word.capitalize() for word in words if word)
