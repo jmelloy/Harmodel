@@ -58,7 +58,7 @@ class ClientGenerator:
         if use_models and self.model_generator:
             lines.append('# Import generated models for type hints')
             lines.append('try:')
-            lines.append('    from .models import *')
+            lines.append('    from .models import *  # noqa: F403 - wildcard import needed for generated models')
             lines.append('except ImportError:')
             lines.append('    pass  # Models not available')
             lines.append('')
@@ -163,7 +163,7 @@ class ClientGenerator:
                 value = header['value']
                 # Skip headers that should be set automatically
                 if name.lower() not in ['host', 'content-length', 'connection']:
-                    # Keep the first value for each header
+                    # Collect unique headers across all calls (first occurrence wins)
                     if name not in combined_headers:
                         combined_headers[name] = value
         
@@ -257,7 +257,6 @@ class ClientGenerator:
             # Extract the model class name from the generated model code
             model_code = self.model_generator.models[url]
             # Look for "class ModelName:" pattern
-            import re
             match = re.search(r'class\s+(\w+):', model_code)
             if match:
                 return match.group(1)
